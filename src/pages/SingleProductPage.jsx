@@ -5,6 +5,7 @@ import {
   useGetProductsQuery,
 } from "../redux/slices/productApiSlice";
 import ProductCard from "../components/ProductCard";
+import SkeletonProductCard from "../components/SkeletonProductCard";
 
 const SingleProductPage = () => {
   const { productId } = useParams(); // Get product ID from URL parameters
@@ -27,7 +28,12 @@ const SingleProductPage = () => {
   }, [product, allProducts, productId]); // Add dependencies to useEffect
 
   if (isLoading) {
-    return <div>Loading Product...</div>;
+    return (
+      <div>
+        {" "}
+        <SkeletonProductCard />
+      </div>
+    );
   }
 
   if (error) {
@@ -40,7 +46,12 @@ const SingleProductPage = () => {
 
   if (allProductsLoading || allProductsError) {
     // Handle loading/error states for all products fetching (optional)
-    return <div>Loading similar products...</div>;
+    return (
+      <div>
+        {" "}
+        <SkeletonProductCard />
+      </div>
+    );
   }
 
   return (
@@ -60,6 +71,7 @@ const SingleProductPage = () => {
       <p className="text-gray-700 mb-4">{product.description}</p>
       <p className="font-bold mb-4">Price: ${product.price}</p>
       <h2>Similar Products</h2>
+
       {similarProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {similarProducts.map((similarProduct) => (
