@@ -6,8 +6,9 @@ import { useLogoutMutation } from "../redux/slices/usersApiSlice";
 import { logout } from "../redux/slices/authSlice";
 import { FaBuyNLarge } from "react-icons/fa";
 import { IoMenuOutline } from "react-icons/io5";
-import UserSearchModal from "./UserSearchModal";
-import { useEffect, useState } from "react";
+import ProductSearchModal from "./ProductSearchModal";
+import { useState } from "react";
+import { useGetProductsQuery } from "../redux/slices/productApiSlice";
 
 const Navbar = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -18,28 +19,31 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        const data = await response.json();
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-    fetchUsers();
-  }, []);
+  console.log(products);
+
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://jsonplaceholder.typicode.com/products"
+  //       );
+  //       const data = await response.json();
+
+  //       setUsers(data);
+  //     } catch (error) {
+  //       console.error("Error fetching products:", error);
+  //     }
+  //   };
+  //   fetchUsers();
+  // }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
-    const filteredResults = users.filter((user) =>
-      user.name.toLowerCase().includes(searchTerm)
+    const filteredResults = products.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm)
     );
     setSearchResults(filteredResults);
     setShowModal(searchTerm.length > 0); // Open modal when there's a search term
@@ -129,7 +133,7 @@ const Navbar = () => {
               onSubmit={handleSearchSubmit}
             />
             {showModal && (
-              <UserSearchModal
+              <ProductSearchModal
                 searchResults={searchResults}
                 onClose={handleCloseModal}
                 searchTerm={searchTerm}

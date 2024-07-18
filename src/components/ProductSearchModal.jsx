@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 
-const UserSearchModal = ({
+const ProductSearchModal = ({
   searchResults,
   onClose,
   searchTerm,
@@ -20,14 +20,14 @@ const UserSearchModal = ({
 
         {searchResults.length > 0 ? (
           <ul className="list-none">
-            {searchResults.map((user) => (
-              <li key={user.id} className="p-2 hover:bg-gray-100">
+            {searchResults.map((product) => (
+              <li key={product._id} className="p-2 hover:bg-gray-100">
                 <Link
-                  to={`/users/${user.id}`}
+                  to={`/products/${product._id}`}
                   onClick={handleSearchSubmit}
                   className="text-base font-medium"
                 >
-                  {user.name}
+                  {product.title}
                 </Link>
               </li>
             ))}
@@ -42,4 +42,4 @@ const UserSearchModal = ({
   );
 };
 
-export default UserSearchModal;
+export default ProductSearchModal;
