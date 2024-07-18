@@ -1,4 +1,6 @@
-const ProductCard = ({ product }) => {
+import { MdDelete } from "react-icons/md";
+
+const ProductCard = ({ product, onDelete }) => {
   // Implement logic to display product details (title, image, price, etc.)
   // You can link to a product details page here if needed.
 
@@ -9,10 +11,18 @@ const ProductCard = ({ product }) => {
         alt={product.title}
         className="w-full h-40 object-cover rounded-t-md"
       />
-      <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
-        <p className="text-gray-700 mb-2">{product.price}</p>
-        <p className="text-gray-700 mb-2">{product.location}</p>
+      <div className="p-4 flex justify-between items-center">
+        <div>
+          <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+          <p className="text-gray-700 mb-2">{product.price}</p>
+          <p className="text-gray-700 mb-2">{product.location}</p>
+        </div>
+        <div>
+          <MdDelete
+            className="text-red-700 text-xl cursor-pointer hover:text-2xl"
+            onClick={onDelete}
+          />
+        </div>
       </div>
     </div>
   );
