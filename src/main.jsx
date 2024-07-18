@@ -18,6 +18,7 @@ import ProductCreationPage from "./pages/ProductCreationPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import UserListedProductsPage from "./pages/UserListedProductsPage.jsx";
 import SingleProductPage from "./pages/SingleProductPage.jsx";
+import CategoryProducts from "./pages/CategoryProducts.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
         <Route index path="/products" element={<ProductsPage />} />
         <Route path="/:userId/products" element={<UserListedProductsPage />} />
         <Route path="/products/:productId" element={<SingleProductPage />} />
+        <Route path="/categories/:category" element={<CategoryProducts />} />
       </Route>
     </Route>
   )

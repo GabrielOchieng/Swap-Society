@@ -1,7 +1,12 @@
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux"; // Import useSelector
 
 const ProductCard = ({ product, onDelete }) => {
+  const { userInfo } = useSelector((state) => state.auth); // Access user info from Redux
+
+  const isProductSeller = userInfo._id === product.seller._id; // Check if current user is the seller
+
   // Implement logic to display product details (title, image, price, etc.)
   // You can link to a product details page here if needed.
 
@@ -20,14 +25,16 @@ const ProductCard = ({ product, onDelete }) => {
         </div>
         <div className="flex flex-col justify-between gap-4">
           <div className="bg-green-400 p-1 hover:bg-green-700">
-            <Link to={`/products/${product._id}`}>View More Details</Link>
+            <Link to={`/products/${product._id}`}>Details</Link>
           </div>
-          <div>
-            <MdDelete
-              className="text-red-700 text-xl cursor-pointer hover:text-2xl"
-              onClick={onDelete}
-            />
-          </div>
+          {isProductSeller && ( // Conditionally render delete button
+            <div>
+              <MdDelete
+                className="text-red-700 text-xl cursor-pointer hover:text-2xl"
+                onClick={onDelete}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { IoMenuOutline } from "react-icons/io5";
 import ProductSearchModal from "./ProductSearchModal";
 import { useState } from "react";
 import { useGetProductsQuery } from "../redux/slices/productApiSlice";
+import CategoriesModal from "./CategoriesModal";
 
 const Navbar = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -19,6 +20,7 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [isCategoriesModalOpen, setIsCategoriesModalOpen] = useState(false);
 
   const { data: products, isLoading, error } = useGetProductsQuery();
 
@@ -49,6 +51,11 @@ const Navbar = () => {
       alert(err.message);
     }
   };
+
+  const toggleCategoriesModal = () => {
+    setIsCategoriesModalOpen(!isCategoriesModalOpen);
+  };
+
   return (
     <div className="px-4 relative shadow-md">
       {/* BIGGER SCREENS */}
@@ -100,13 +107,13 @@ const Navbar = () => {
         </div>
         {/* RIGHT */}
         <div className="flex gap-4  ">
-          <Link
-            to="/"
+          <div
             className="flex items-center hover:bg-gray-300 py-1 px-2 rounded-full"
+            onClick={toggleCategoriesModal}
           >
             <IoMenuOutline className="h-8 w-8 object-cover " />
             <p className="hidden md:block">Categories</p>
-          </Link>
+          </div>
           {/* Search Bar */}
           <div className=" flex items-center justify-between gap-8">
             <SearchBar
@@ -125,6 +132,13 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Categories Modal (Optional Styling) */}
+      {isCategoriesModalOpen && (
+        <div>
+          <CategoriesModal />
+        </div>
+      )}
     </div>
   );
 };
