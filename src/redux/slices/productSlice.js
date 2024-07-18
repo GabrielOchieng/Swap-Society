@@ -23,6 +23,19 @@ const productSlice = createSlice({
       state.error = action.payload;
     },
 
+    // Fetch products for a specific user
+    fetchUserProductsRequest: (state) => {
+      state.loading = true;
+    },
+    fetchUserProductsSuccess: (state, action) => {
+      state.loading = false;
+      state.products = action.payload;
+    },
+    fetchUserProductsFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     // Create a product
     createProductRequest: (state) => {
       state.loading = true;
@@ -59,6 +72,9 @@ export const {
   fetchProductsRequest,
   fetchProductsSuccess,
   fetchProductsFailure,
+  fetchUserProductsRequest,
+  fetchUserProductsSuccess,
+  fetchUserProductsFailure,
   createProductRequest,
   createProductSuccess,
   createProductFailure,

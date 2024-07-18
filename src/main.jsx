@@ -16,6 +16,7 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import PrivateRoutes from "./routes/PrivateRoutes.jsx";
 import ProductCreationPage from "./pages/ProductCreationPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
+import UserListedProductsPage from "./pages/UserListedProductsPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route element={<PrivateRoutes />}>
         <Route index path="/createproduct" element={<ProductCreationPage />} />
         <Route index path="/products" element={<ProductsPage />} />
+        <Route path="/:userId/products" element={<UserListedProductsPage />} />
       </Route>
     </Route>
   )

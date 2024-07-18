@@ -84,6 +84,12 @@ const Navbar = () => {
             <Link to="/" className=" hover:bg-gray-300 py-1 px-5 rounded-full">
               Buy
             </Link>
+            <Link
+              to="/:userId/products"
+              className=" hover:bg-gray-300 py-1 px-5 rounded-full"
+            >
+              My Products
+            </Link>
 
             {userInfo ? (
               <div className="flex gap-5">
