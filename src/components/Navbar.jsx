@@ -22,24 +22,6 @@ const Navbar = () => {
 
   const { data: products, isLoading, error } = useGetProductsQuery();
 
-  console.log(products);
-
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         "https://jsonplaceholder.typicode.com/products"
-  //       );
-  //       const data = await response.json();
-
-  //       setUsers(data);
-  //     } catch (error) {
-  //       console.error("Error fetching products:", error);
-  //     }
-  //   };
-  //   fetchUsers();
-  // }, []);
-
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
     const filteredResults = products.filter((product) =>
