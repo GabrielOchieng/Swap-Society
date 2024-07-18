@@ -1,3 +1,43 @@
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useCreateProductMutation } from "../redux/slices/productApiSlice"; // Import the mutation
+
+// const ProductCreationPage = () => {
+//   const [title, setTitle] = useState("");
+//   const [description, setDescription] = useState("");
+//   const [price, setPrice] = useState(0);
+//   const [location, setLocation] = useState("");
+//   const [category, setCategory] = useState("");
+//   const [images, setImages] = useState([]);
+//   const navigate = useNavigate();
+
+//   const [createProduct, { isLoading, error }] = useCreateProductMutation();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const response = await createProduct({
+//         title,
+//         description,
+//         price,
+//         location,
+//         category,
+//         images: Array.from(images),
+//       }); // Use the mutation
+//       console.log("RESPONSE", response);
+
+//       // navigate("/products"); // Redirect after successful creation
+//     } catch (err) {
+//       console.log(err);
+//       // Handle errors appropriately (e.g., display error message to user)
+//     }
+//   };
+
+//   const handleImageChange = (e) => {
+//     setImages(e.target.files);
+//   };
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateProductMutation } from "../redux/slices/productApiSlice"; // Import the mutation
@@ -8,7 +48,7 @@ const ProductCreationPage = () => {
   const [price, setPrice] = useState(0);
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]); // Array to store selected images
   const navigate = useNavigate();
 
   const [createProduct, { isLoading, error }] = useCreateProductMutation();
@@ -16,29 +56,24 @@ const ProductCreationPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("description", description);
-    // formData.append("price", price);
-    // formData.append("location", location);
-    // formData.append("category", category);
+    // Prepare the data for the mutation (including images)
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("location", location);
+    formData.append("category", category);
 
-    // for (let image of images) {
-    //   formData.append("images", image);
-    // }
+    // Append each selected image to the formData
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
 
     try {
-      const response = await createProduct({
-        title,
-        description,
-        price,
-        location,
-        category,
-        // images: Array.from(images),
-      }); // Use the mutation
+      const response = await createProduct(formData);
       console.log("RESPONSE", response);
 
-      navigate("/products"); // Redirect after successful creation
+      // navigate("/products"); // Redirect after successful creation
     } catch (err) {
       console.log(err);
       // Handle errors appropriately (e.g., display error message to user)
@@ -46,8 +81,10 @@ const ProductCreationPage = () => {
   };
 
   const handleImageChange = (e) => {
-    setImages(e.target.files);
+    // setImages(e.target.files); // Update the images state with selected files
+    setImages([...images, ...e.target.files]);
   };
+
   return (
     <div className="container mx-auto px-4 py-10">
       <h1 className="text-3xl font-semibold mb-4">Create Product</h1>
