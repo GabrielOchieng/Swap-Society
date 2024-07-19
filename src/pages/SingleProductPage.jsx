@@ -6,9 +6,11 @@ import {
 } from "../redux/slices/productApiSlice";
 import ProductCard from "../components/ProductCard";
 import SkeletonProductCard from "../components/SkeletonProductCard";
+import SellerCard from "../components/SellerCard";
 
 const SingleProductPage = () => {
   const { productId } = useParams(); // Get product ID from URL parameters
+  const [selectedImage, setSelectedImage] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(productId);
@@ -30,7 +32,6 @@ const SingleProductPage = () => {
   if (isLoading) {
     return (
       <div>
-        {" "}
         <SkeletonProductCard />
       </div>
     );
@@ -48,25 +49,57 @@ const SingleProductPage = () => {
     // Handle loading/error states for all products fetching (optional)
     return (
       <div>
-        {" "}
         <SkeletonProductCard />
       </div>
     );
   }
 
+  const handleImageClick = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
   return (
-    <div className="container mx-auto px-4 py-10">
-      <h1>{product.title}</h1>
+    <div className="container mx-auto p-8">
+      <h1 className="font-bold">{product.title}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {product.images &&
-          product.images.map((imageUrl, index) => (
+        <div className="relative">
+          {selectedImage ? (
             <img
-              key={index} // Add a unique key for each image
-              src={imageUrl}
-              alt={`${product.title} - Image ${index + 1}`} // Descriptive alt text
+              src={selectedImage}
+              alt={`${product.title} - Main Image`}
               className="w-full h-auto object-cover rounded-md mb-4"
             />
-          ))}
+          ) : (
+            product.images && (
+              <img
+                src={product.images[0]}
+                alt={`${product.title} - Main Image`}
+                className="w-full h-auto object-contain rounded-md mb-4"
+              />
+            )
+          )}
+          <div className="absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-75">
+            <button
+              className="bg-gray-800 text-white px-4 py-2 rounded-md"
+              onClick={() => setSelectedImage(null)} // Reset selected image
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        <div>{product && <SellerCard product={product} />}</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {product.images &&
+            product.images.map((imageUrl, index) => (
+              <img
+                key={index}
+                src={imageUrl}
+                alt={`${product.title} - Image ${index + 1}`}
+                className="w-48 h-48 object-cover rounded-md cursor-pointer mb-2"
+                onClick={() => handleImageClick(imageUrl)} // Set selected image on click
+              />
+            ))}
+        </div>
       </div>
       <p className="text-gray-700 mb-4">{product.description}</p>
       <p className="font-bold mb-4">Price: ${product.price}</p>
@@ -75,7 +108,7 @@ const SingleProductPage = () => {
       {similarProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {similarProducts.map((similarProduct) => (
-            <ProductCard key={similarProduct._id} product={similarProduct} /> // Assuming ProductCard component
+            <ProductCard key={similarProduct._id} product={similarProduct} />
           ))}
         </div>
       ) : (
