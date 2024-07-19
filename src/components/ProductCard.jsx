@@ -24,7 +24,7 @@ const ProductCard = ({ product, onDelete }) => {
           <p className="text-gray-700 mb-2">{product.location}</p>
         </div>
         <div className="flex flex-col justify-between gap-4">
-          <div className="bg-green-400 p-1 hover:bg-green-700">
+          <div className="bg-orange-400 p-1 hover:bg-orange-700">
             <Link to={`/products/${product._id}`}>Details</Link>
           </div>
           {isProductSeller && ( // Conditionally render delete button

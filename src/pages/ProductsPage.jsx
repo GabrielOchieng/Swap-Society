@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
   // Implement logic to display product details (title, image, price, etc.)
   // You can link to a product details page here if needed.
   return (
-    <div className="bg-white rounded shadow-md p-4">
+    <div className="bg-gray-100 rounded shadow-md p-4">
       <img
         src={product.images && product.images[0]} // Assuming first image in 'images' array
         alt={product.title}

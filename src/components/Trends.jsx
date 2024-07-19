@@ -7,13 +7,13 @@ import vintage from "../assets/images/vintage.avif";
 
 const Trends = () => {
   return (
-    <div className="flex flex-col items-center py-4 px-8 gap-10">
+    <div className="flex flex-col items-center p-8 gap-10 bg-gray-100">
       <div>
-        <h4 className="font-bold text-gray-500 text-2xl">
+        <h4 className="font-bold text-gray-500 text-xl md:text-2xl">
           Check out the latest trends.
         </h4>
       </div>
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-4 flex-wrap">
         <div className="flex flex-col items-center gap-2">
           <img src={chef} alt="trending items" className="rounded-full" />
           <h6 className="font-semibold">Chef's Kiss</h6>

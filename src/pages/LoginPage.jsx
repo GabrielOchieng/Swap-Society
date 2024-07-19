@@ -55,8 +55,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cyan-100 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-md px-8 py-12 w-[90%] md:w-1/3">
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="bg-gray-100 rounded-lg shadow-md px-8 py-12 w-[90%] md:w-1/3">
         <h1 className="text-xl sm:text-2xl font-bold text-center mb-8">
           Login to view more information
         </h1>
@@ -99,7 +99,7 @@ const LoginPage = () => {
           ) : (
             <button
               type="submit"
-              className="w-full rounded-md bg-cyan-500 py-2 text-center text-white font-bold hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:offset-2 focus:ring-blue-500"
+              className="w-full rounded-md bg-orange-500 py-2 text-center text-white font-bold hover:bg-orange-700 focus:outline-none focus:ring-2 focus:offset-2 focus:ring-blue-500"
               disabled={!email || !password}
             >
               Login
@@ -111,7 +111,7 @@ const LoginPage = () => {
               Not Registered?{" "}
               <span>
                 {" "}
-                <Link to="/register" className="text-blue-500 hover:underline">
+                <Link to="/register" className="text-gray-500 hover:underline">
                   SignUp
                 </Link>{" "}
               </span>{" "}

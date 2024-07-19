@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "../redux/slices/productApiSlice";
+import { IoClose } from "react-icons/io5";
 
-const CategoriesModal = () => {
+const CategoriesModal = ({ onClose }) => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
   if (isLoading) {
@@ -21,15 +22,18 @@ const CategoriesModal = () => {
   }, {});
 
   return (
-    <div className="opacity-75 z-50">
-      <div className="absolute left-[100px] top-[150px]  transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 rounded shadow-md p-4">
-        <h2 className="underline font-bold">Categories</h2>
+    <div className=" z-50 top-60">
+      <div className="fixed w-[75%] sm:w-[50%] md:w-[25%] left-0 top-16 lg:top-0 bg-white rounded shadow-md">
+        <div className="bg-black text-white h-16 p-4 flex justify-between items-center text-2xl font-bold">
+          <h2>Categories</h2>
+          <IoClose className="cursor-pointer" onClick={onClose} />
+        </div>
         {Object.keys(categoryProductCount).length > 0 ? (
-          <ul className="list-disc pl-4 space-y-2">
+          <ul className=" space-y-2 p-4">
             {Object.entries(categoryProductCount).map(([category, count]) => (
               <li
                 key={category}
-                className="text-gray-700 hover:text-teal-500 cursor-pointer"
+                className="text-black hover:text-orange-500 cursor-pointer"
               >
                 <Link to={`/categories/${category}`}>
                   {category} ({count} products)
@@ -38,7 +42,7 @@ const CategoriesModal = () => {
             ))}
           </ul>
         ) : (
-          <p className="text-gray-500">No categories found.</p>
+          <p className="text-orange-500">No categories found.</p>
         )}
       </div>
     </div>

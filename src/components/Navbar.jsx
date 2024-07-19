@@ -5,7 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../redux/slices/usersApiSlice";
 import { logout } from "../redux/slices/authSlice";
 import { FaBuyNLarge } from "react-icons/fa";
-import { IoMenuOutline } from "react-icons/io5";
+// import { IoMenuOutline } from "react-icons/io5";
+import { IoIosArrowDown } from "react-icons/io";
+
 import ProductSearchModal from "./ProductSearchModal";
 import { useState } from "react";
 import { useGetProductsQuery } from "../redux/slices/productApiSlice";
@@ -16,6 +18,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
+
+  console.log(userInfo);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -35,6 +39,10 @@ const Navbar = () => {
   const handleSearchSubmit = (event) => {
     setShowModal(false);
     setSearchTerm("");
+  };
+
+  const handleCloseCategoriesModal = () => {
+    setIsCategoriesModalOpen(false);
   };
 
   const handleCloseModal = () => {
@@ -57,65 +65,69 @@ const Navbar = () => {
   };
 
   return (
-    <div className="px-4 relative shadow-md">
+    <div>
       {/* BIGGER SCREENS */}
-      <div className="flex flex-col p-5  md:flex-row items-center h-full gap-8 ">
+      <div className="flex flex-col py-2  px-4 lg:flex-row lg:items-center gap-4 shadow-md lg:h-16 justify-between text-white bg-black">
         {/* LEFT */}
-        <div className=" flex items-center gap-2 md:gap-12">
+        <div className=" flex flex-1 items-center sm:gap-2 justify-between">
           <Link to="/" className="flex items-center gap-2">
             {" "}
-            <FaBuyNLarge className="w-12 h-12 object-cover text-teal-700" />
-            <div className="text-2xl tracking-wide font-bold">B&S</div>
+            <FaBuyNLarge className="w-12 h-12 object-cover text-white" />
+            <h1 className="text-2xl tracking-wide font-bold">B&S</h1>
           </Link>
-          <div className="flex justify-between">
-            <Link
-              to="/createproduct"
-              className=" hover:bg-gray-300 py-1 px-5 rounded-full"
-            >
-              Sell
-            </Link>
-            <Link to="/" className=" hover:bg-gray-300 py-1 px-5 rounded-full">
-              Buy
-            </Link>
-            <Link
-              to="/:userId/products"
-              className=" hover:bg-gray-300 py-1 px-5 rounded-full"
-            >
-              My Products
-            </Link>
 
-            {userInfo ? (
-              <div className="flex gap-5">
-                <p>Welcome {userInfo.username}</p>
-                <Link
-                  to="/"
-                  onClick={handleLogout}
-                  className=" hover:bg-gray-300 py-1 px-5 rounded-full"
-                >
-                  Logout
-                </Link>
-              </div>
-            ) : (
+          <Link
+            to="/createproduct"
+            className=" hover:border-2 border-white py-1 px-2 md:px-5 rounded-full text-sm md:text-lg"
+          >
+            Sell
+          </Link>
+          <Link
+            to="/"
+            className=" hover:border-2 border-white py-1 px-2 md:px-5 rounded-full text-sm md:text-lg"
+          >
+            Buy
+          </Link>
+          <Link
+            to="/:userId/products"
+            className=" hover:border-2 border-white py-1 px-2 md:px-5 rounded-full text-sm md:text-lg"
+          >
+            Products
+          </Link>
+
+          {userInfo ? (
+            <div className="flex gap-5">
               <Link
-                to="/login"
-                className=" hover:bg-gray-300 py-1 px-5 rounded-full"
+                to="/"
+                onClick={handleLogout}
+                className=" hover:border-2 border-white py-1 px-2 md:px-5 rounded-full text-sm md:text-lg"
               >
-                Signin
+                Logout
               </Link>
-            )}
-          </div>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className=" hover:border-2 border-white py-1 px-5 rounded-full text-sm md:text-lg"
+            >
+              Signin
+            </Link>
+          )}
         </div>
         {/* RIGHT */}
-        <div className="flex gap-4  ">
+        <div
+          className="flex justify-between flex-1 gap-1
+         "
+        >
           <div
-            className="flex items-center hover:bg-gray-300 py-1 px-2 rounded-full"
+            className="flex items-center hover:border-2 border-white py-1 px-2 rounded-full cursor-pointer"
             onClick={toggleCategoriesModal}
           >
-            <IoMenuOutline className="h-8 w-8 object-cover " />
-            <p className="hidden md:block">Categories</p>
+            <IoIosArrowDown className="h-6 w-6" />
+            <p className="hidden md:block text-sm md:text-lg">Categories</p>
           </div>
           {/* Search Bar */}
-          <div className=" flex items-center justify-between gap-8">
+          <div className=" flex items-center justify-between gap-8 w-full">
             <SearchBar
               searchTerm={searchTerm}
               onChange={handleSearchChange}
@@ -136,7 +148,7 @@ const Navbar = () => {
       {/* Categories Modal (Optional Styling) */}
       {isCategoriesModalOpen && (
         <div>
-          <CategoriesModal />
+          <CategoriesModal onClose={handleCloseCategoriesModal} />
         </div>
       )}
     </div>
