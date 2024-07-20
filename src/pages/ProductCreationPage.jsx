@@ -86,108 +86,110 @@ const ProductCreationPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-semibold mb-4">Create Product</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="title"
-            className="block text-gray-700 text-sm font-bold mb-2"
+    <div className="bg-gray-100">
+      <div className="container mx-auto px-4 py-10 ">
+        <h1 className="text-3xl font-semibold mb-4">Create Product</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="title"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="description"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            ></textarea>
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="price"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Price
+            </label>
+            <input
+              type="number"
+              id="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="location"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Location
+            </label>
+            <input
+              type="text"
+              id="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="category"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Category
+            </label>
+            <input
+              type="text"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="images"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Images
+            </label>
+            <input
+              type="file"
+              id="images"
+              multiple
+              onChange={handleImageChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700"
           >
-            Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="price"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Price
-          </label>
-          <input
-            type="number"
-            id="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="location"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Location
-          </label>
-          <input
-            type="text"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="category"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Category
-          </label>
-          <input
-            type="text"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="images"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Images
-          </label>
-          <input
-            type="file"
-            id="images"
-            multiple
-            onChange={handleImageChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700"
-        >
-          Create Product
-        </button>
-      </form>
+            Create Product
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

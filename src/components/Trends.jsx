@@ -4,6 +4,7 @@ import girl from "../assets/images/girl.webp";
 import necklace from "../assets/images/necklace.webp";
 import portrait from "../assets/images/portrait.avif";
 import vintage from "../assets/images/vintage.avif";
+import car from "../assets/images/car.jpeg";
 
 const Trends = () => {
   return (
@@ -33,6 +34,10 @@ const Trends = () => {
         <div className="flex flex-col items-center gap-2">
           <img src={necklace} alt="trending items" className="rounded-full" />
           <h6 className="font-semibold">Charm Necklaces</h6>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <img src={car} alt="trending items" className="rounded-full" />
+          <h6 className="font-semibold">Cars</h6>
         </div>
         <div className="flex flex-col items-center gap-2">
           <img src={decor} alt="trending items" className="rounded-full" />

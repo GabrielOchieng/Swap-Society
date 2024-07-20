@@ -6,7 +6,7 @@ const SearchBar = ({ searchTerm, onChange, onSubmit }) => {
       <input
         type="text"
         name="name"
-        placeholder="Search"
+        placeholder="Search for a product..."
         className="flex-1 bg-transparent outline-none p-2 text-black "
         value={searchTerm}
         onChange={onChange}

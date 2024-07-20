@@ -22,9 +22,9 @@ const CategoriesModal = ({ onClose }) => {
   }, {});
 
   return (
-    <div className=" z-50 top-60">
-      <div className="fixed w-[75%] sm:w-[50%] md:w-[25%] left-0 top-16 lg:top-0 bg-white rounded shadow-md">
-        <div className="bg-black text-white h-16 p-4 flex justify-between items-center text-2xl font-bold">
+    <div className=" top-60">
+      <div className="fixed w-[75%] z-50 sm:w-[50%] md:w-[25%] left-0 top-16 lg:top-0 bg-white rounded shadow-md">
+        <div className="bg-gray-900 text-white h-16 p-4 flex justify-between items-center text-2xl font-bold">
           <h2>Categories</h2>
           <IoClose className="cursor-pointer" onClick={onClose} />
         </div>

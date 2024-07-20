@@ -1,10 +1,3 @@
-// import chef from "../assets/images/chef.avif";
-// import decor from "../assets/images/decor.avif";
-// import girl from "../assets/images/girl.webp";
-// import necklace from "../assets/images/necklace.webp";
-// import portrait from "../assets/images/portrait.avif";
-// import vintage from "../assets/images/vintage.avif";
-// import car from "../assets/images/car.jpeg";
 import { useGetProductsQuery } from "../redux/slices/productApiSlice";
 import { Link } from "react-router-dom";
 import ProductSkeleton from "./ProductSkeleton";
