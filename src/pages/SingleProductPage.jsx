@@ -7,6 +7,7 @@ import {
 import ProductCard from "../components/ProductCard";
 import SkeletonProductCard from "../components/SkeletonProductCard";
 import SellerCard from "../components/SellerCard";
+import { IoLocationOutline } from "react-icons/io5";
 
 const SingleProductPage = () => {
   const { productId } = useParams(); // Get product ID from URL parameters
@@ -102,8 +103,16 @@ const SingleProductPage = () => {
         </div>
       </div>
       <p className="text-gray-700 mb-4">{product.description}</p>
-      <p className="font-bold mb-4">Price: ${product.price}</p>
-      <h2>Similar Products</h2>
+      <p className="font-bold mb-4 text-green-600">
+        Price: Ksh.{product.price}
+      </p>
+      <p className=" mb-4 flex gap-1 items-center ">
+        Location: <IoLocationOutline /> {product.location}
+      </p>
+
+      <div className="h-[2px] w-full bg-gray-200 my-4"></div>
+
+      <h2 className="font-bold">Similar Products</h2>
 
       {similarProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
