@@ -43,12 +43,20 @@ const SellerCard = ({ product }) => {
         </li>
       </ul>
       <p className="font-bold mt-4">Price: ${product.price}</p>
+      {!showPaymentModal && (
+        <button
+          className="bg-orange-500 p-2 rounded"
+          onClick={handleShowPaymentModal}
+        >
+          Make Payment
+        </button>
+      )}
 
-      <button className="bg-orange-500" onClick={handleShowPaymentModal}>
-        Make Payment
-      </button>
-
-      {showPaymentModal && <PaymentModal />}
+      {showPaymentModal && (
+        <div className="mt-3">
+          <PaymentModal showPaymentModal={showPaymentModal} />{" "}
+        </div>
+      )}
     </div>
   );
 };
