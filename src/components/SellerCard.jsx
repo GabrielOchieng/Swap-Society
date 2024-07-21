@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
+import PaymentModal from "./PaymentModal";
 
 const SellerCard = ({ product }) => {
   const sellerContact = product?.seller?.contact || "N/A"; // Assuming contact is phone number
+
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   console.log(product.seller);
   const [showContact, setShowContact] = useState(false);
 
   const handleShowContact = () => {
     setShowContact(!showContact);
+  };
+
+  const handleShowPaymentModal = () => {
+    setShowPaymentModal(!showPaymentModal);
   };
   return (
     <div className="bg-white border rounded-md p-4 shadow-sm">
@@ -36,6 +43,12 @@ const SellerCard = ({ product }) => {
         </li>
       </ul>
       <p className="font-bold mt-4">Price: ${product.price}</p>
+
+      <button className="bg-orange-500" onClick={handleShowPaymentModal}>
+        Make Payment
+      </button>
+
+      {showPaymentModal && <PaymentModal />}
     </div>
   );
 };
