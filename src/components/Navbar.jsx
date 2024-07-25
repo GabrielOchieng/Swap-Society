@@ -19,8 +19,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
 
-  console.log(userInfo);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -83,10 +81,10 @@ const Navbar = () => {
             Sell
           </Link>
           <Link
-            to="/"
+            to="/chats"
             className=" hover:border-2 border-white py-1 px-2 md:px-5 rounded-full text-sm md:text-lg"
           >
-            Buy
+            Chats
           </Link>
           <Link
             to="/:userId/products"
