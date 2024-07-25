@@ -9,6 +9,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
@@ -34,6 +35,7 @@ const RegisterPage = () => {
         const res = await register({
           name,
           username,
+          phoneNumber,
           email,
           password,
         }).unwrap();
@@ -73,6 +75,19 @@ const RegisterPage = () => {
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="phoneNumber" className="block text-gray-700 mb-2">
+              Phone Number
+            </label>
+            <input
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
