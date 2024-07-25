@@ -112,10 +112,8 @@ const Conversation = ({ conversation, currentUser }) => {
 
   console.log("USER", user);
   return (
-    <div className="conversation">
-      {/* <img src="" alt="" className="conversationImg" /> */}
-
-      <IoPersonCircleSharp className="conversationImg" />
+    <div className="conversation flex items-center gap-3 py-2">
+      <IoPersonCircleSharp className="conversationImg h-8 w-8" />
 
       <span className="conversationName">{user?.name}</span>
     </div>
