@@ -71,7 +71,7 @@ const SellerCard = ({ product }) => {
 
       <div>
         <Link
-          to={`/chats/${product.seller._id}`} // Remove unnecessary link if using sellerId for chat initiation within SellerCard
+          to={`/chats`} // Remove unnecessary link if using sellerId for chat initiation within SellerCard
           className="flex flex-row bg-orange-500 text-black p-2 mt-2 rounded w-32 items-center hover:text-white"
           onClick={() => handleStartChat(product.seller._id)} // Pass seller ID
         >

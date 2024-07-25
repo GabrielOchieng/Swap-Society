@@ -33,7 +33,7 @@ const router = createBrowserRouter(
         <Route path="/:userId/products" element={<UserListedProductsPage />} />
         <Route path="/products/:productId" element={<SingleProductPage />} />
         <Route path="/categories/:category" element={<CategoryProducts />} />
-        <Route path="/chats/:sellerId" element={<ChatPage />} />
+        <Route path="/chats" element={<ChatPage />} />
       </Route>
     </Route>
   )
