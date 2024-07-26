@@ -71,6 +71,7 @@ const ChatPage = () => {
         );
 
         setConversations(response.data);
+        console.log("CONVERSATIONS", response.data);
       } catch (err) {
         console.log(err);
       }

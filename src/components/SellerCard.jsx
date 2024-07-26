@@ -2,16 +2,19 @@ import { useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import PaymentModal from "./PaymentModal";
 import { RiMessage2Line } from "react-icons/ri";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const SellerCard = ({ product }) => {
   const sellerContact = product?.seller?.contact || "N/A"; // Assuming contact is phone number
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+  const user = userInfo?.user;
+  const isProductSeller = product.seller._id === user._id;
 
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const { seller } = product;
-  console.log(seller);
 
   const sellerId = seller._id;
   const [showContact, setShowContact] = useState(false);
@@ -24,8 +27,27 @@ const SellerCard = ({ product }) => {
     setShowPaymentModal(!showPaymentModal);
   };
 
-  const handleStartChat = async (sellerId) => {
-    navigate(`/chats/${sellerId}`);
+  // Function to initiate chat with seller
+  const handleStartChat = async () => {
+    if (userInfo) {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/conversations",
+          {
+            senderId: user._id,
+            receiverId: seller._id,
+          }
+        );
+
+        // 3. Redirect user to the chat page with the newly created conversation ID
+        const conversationId = response.data._id;
+        // navigate(`/chats/${conversationId}`);
+      } catch (err) {
+        console.error("Error creating conversation:", err);
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -68,17 +90,18 @@ const SellerCard = ({ product }) => {
           <PaymentModal showPaymentModal={showPaymentModal} />{" "}
         </div>
       )}
-
-      <div>
-        <Link
-          to={`/chats`}
-          className="flex flex-row bg-orange-500 text-black p-2 mt-2 rounded w-32 items-center hover:text-white"
-          onClick={() => handleStartChat(product.seller._id)} // Pass seller ID
-        >
-          <p>Start Chat</p>
-          <RiMessage2Line className="ml-2" />
-        </Link>
-      </div>
+      {!isProductSeller && (
+        <div>
+          <Link
+            to={`/chats`}
+            className="flex flex-row bg-orange-500 text-black p-2 mt-2 rounded w-32 items-center hover:text-white"
+            onClick={handleStartChat} // Pass seller ID
+          >
+            <p>Start Chat</p>
+            <RiMessage2Line className="ml-2" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
