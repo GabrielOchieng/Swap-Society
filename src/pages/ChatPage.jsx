@@ -110,12 +110,6 @@ const ChatPage = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleUserFetched = (chatter) => {
-    setFetchedUser(chatter);
-    console.log(fetchedUser);
-    // Do something with the fetched user data here, if needed
-  };
-
   return (
     <div className="messenger flex flex-col md:flex-row">
       <div className="chatMenu w-full md:w-[20%] border-r">
@@ -131,23 +125,18 @@ const ChatPage = () => {
               onClick={() => setCurrentChat(c)}
               className="cursor-pointer hover:bg-gray-100 px-4 py-2"
             >
-              <Conversation
-                conversation={c}
-                currentUser={user}
-                onUserFetched={handleUserFetched}
-              />
+              <Conversation conversation={c} currentUser={user} />
             </div>
           ))}
         </div>
       </div>
       <div className="chatBox w-full md:w-[80%] p-2 md:p-4 ">
-        {fetchedUser && (
-          <div className="flex items-center gap-3 py-4 ">
-            <IoPersonCircleSharp className="conversationImg h-8 w-8" />
+        <div className="flex items-center gap-3 py-4 ">
+          <IoPersonCircleSharp className="conversationImg h-8 w-8" />
+          {/* CHATTER  */}
+          <span className="conversationName">{}</span>
+        </div>
 
-            <span className="conversationName">{fetchedUser?.name}</span>
-          </div>
-        )}
         <div className="chatBoxWrapper flex flex-col">
           {currentChat ? (
             <>
