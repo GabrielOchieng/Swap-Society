@@ -74,7 +74,7 @@ const Conversation = ({ conversation, currentUser }) => {
       if (friendId) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/users/${friendId}`
+            `https://swap-society-api.onrender.com/users/${friendId}`
           );
           setUser(res.data);
         } catch (err) {
