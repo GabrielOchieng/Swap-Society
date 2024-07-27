@@ -21,7 +21,8 @@ const ChatPage = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:5000");
+    // socket.current = io("ws://localhost:5000");
+    socket.current = io("https://swap-society-api.onrender.com/");
 
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
