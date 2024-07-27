@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Conversation from "../components/Conversation";
 import Message from "../components/Message";
-import ChatOnline from "../components/ChatOnline";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { IoPersonCircleSharp } from "react-icons/io5";
 
@@ -14,10 +12,8 @@ const ChatPage = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
-  const [fetchedUser, setFetchedUser] = useState(null);
 
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const { sellerId } = useParams();
   const socket = useRef();
 
   const { user } = userInfo;
