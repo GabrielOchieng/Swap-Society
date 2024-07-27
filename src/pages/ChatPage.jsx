@@ -25,7 +25,7 @@ const ChatPage = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://localhost:5000");
 
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
