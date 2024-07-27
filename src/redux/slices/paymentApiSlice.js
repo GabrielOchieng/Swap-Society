@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000", // Replace with your API base URL
+  baseUrl: "https://swap-society-api.onrender.com", // Replace with your API base URL
+  // baseUrl: "http://localhost:5000", // Replace with your API base URL
   prepareHeaders: (headers, { getState }) => {
     const token = localStorage.getItem("token");
     if (token) {

@@ -1,6 +1,6 @@
 import { apiSlice } from "./apiSlice";
 
-const PRODUCTS_URL = "http://localhost:5000/products";
+const PRODUCTS_URL = "https://swap-society-api.onrender.com/products";
 
 export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -22,7 +22,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     // socket.current = io("ws://localhost:5000");
-    socket.current = io("https://swap-society-api.onrender.com/");
+    socket.current = io.connect("https://swap-society-api.onrender.com/");
 
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
@@ -50,7 +50,7 @@ const ChatPage = () => {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/messages/${currentChat?._id}`
+          `https://swap-society-api.onrender.com/messages/${currentChat?._id}`
         );
         setMessages(res.data);
       } catch (err) {
@@ -64,7 +64,7 @@ const ChatPage = () => {
     const getConversations = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/conversations/" + user._id
+          "https://swap-society-api.onrender.com/conversations/" + user._id
         );
 
         setConversations(response.data);
@@ -95,7 +95,10 @@ const ChatPage = () => {
     });
 
     try {
-      const res = await axios.post("http://localhost:5000/messages", message);
+      const res = await axios.post(
+        "https://swap-society-api.onrender.com/messages",
+        message
+      );
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
