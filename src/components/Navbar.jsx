@@ -23,14 +23,24 @@ const Navbar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isCategoriesModalOpen, setIsCategoriesModalOpen] = useState(false);
+  const [searchBy, setSearchBy] = useState("title"); // New state to store search type
+
 
   const { data: products, isLoading, error } = useGetProductsQuery();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
-    const filteredResults = products.filter((product) =>
-      product.title.toLowerCase().includes(searchTerm)
-    );
+    const filteredResults = products.filter((product) => {
+if(searchBy=== "title") {
+ return product.title.toLowerCase().includes(searchTerm)
+} else if(searchBy=== "location") {
+ return product.location.toLowerCase().includes(searchTerm)
+
+}
+    
+
+   } )
+  
     setSearchResults(filteredResults);
     setShowModal(searchTerm.length > 0); // Open modal when there's a search term
   };
@@ -38,6 +48,8 @@ const Navbar = () => {
     setShowModal(false);
     setSearchTerm("");
   };
+
+
 
   const handleCloseCategoriesModal = () => {
     setIsCategoriesModalOpen(false);
@@ -126,11 +138,20 @@ const Navbar = () => {
           </div>
           {/* Search Bar */}
           <div className=" flex items-center justify-between gap-8 w-full">
-            <SearchBar
+            {/* <SearchBar
               searchTerm={searchTerm}
               onChange={handleSearchChange}
               onSubmit={handleSearchSubmit}
+            /> */}
+
+              <SearchBar searchTerm={searchTerm}
+              onChange={handleSearchChange}
+              onSubmit={handleSearchSubmit}
+              searchBy={searchBy}
+              setSearchBy={setSearchBy}
+               
             />
+
             {showModal && (
               <ProductSearchModal
                 searchResults={searchResults}
