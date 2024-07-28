@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import {
   useGetUserProductsQuery,
   useDeleteProductMutation,
-} from "../redux/slices/productApiSlice"; // Assuming productApiSlice location
+} from "../redux/slices/productApiSlice"; 
 import ProductCard from "../components/ProductCard";
 
 const UserListedProductsPage = () => {
@@ -20,11 +20,11 @@ const UserListedProductsPage = () => {
     return <div>Loading User Products...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
 
-  if (!products.length) return <div>You have no listed products.</div>;
+  if (!products?.length) return <div className="h-screen p-10">You have no listed products.</div>;
 
   const handleDeleteProduct = async (productId) => {
     try {
