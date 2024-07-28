@@ -77,7 +77,7 @@ const SellerCard = ({ product }) => {
         </li>
       </ul>
       <p className="font-bold mt-4">Price: ${product.price}</p>
-      {!showPaymentModal && (
+      {!showPaymentModal && !isProductSeller && (
         <button
           className="bg-orange-500 p-2 rounded"
           onClick={handleShowPaymentModal}
@@ -86,7 +86,7 @@ const SellerCard = ({ product }) => {
         </button>
       )}
 
-      {showPaymentModal && (
+      {showPaymentModal && !isProductSeller &&  (
         <div className="mt-3">
           <PaymentOptionsModal showPaymentModal={showPaymentModal}/>
           {/* <PaymentModal showPaymentModal={showPaymentModal} />{" "} */}
