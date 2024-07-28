@@ -77,6 +77,7 @@ const ChatPage = () => {
     getMessages();
   }, [currentChat]);
 
+  console.log('CHATCURRENT', currentChat)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -133,12 +134,13 @@ const ChatPage = () => {
         </div>
       </div>
       <div className="chatBox w-full md:w-[80%] p-2 md:p-4 ">
+        {currentChat &&
         <div className="flex items-center gap-3 py-4 ">
           <IoPersonCircleSharp className="conversationImg h-8 w-8" />
           {/* CHATTER  */}
           <span className="conversationName">{}</span>
         </div>
-
+      }
         <div className="chatBoxWrapper flex flex-col">
           {currentChat ? (
             <>
