@@ -47,20 +47,6 @@ const ChatPage = () => {
   }, [user]);
 
   useEffect(() => {
-    const getMessages = async () => {
-      try {
-        const res = await axios.get(
-          `https://swap-society-api.onrender.com/messages/${currentChat?._id}`
-        );
-        setMessages(res.data);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    getMessages();
-  }, [currentChat]);
-
-  useEffect(() => {
     const getConversations = async () => {
       try {
         const response = await axios.get(
@@ -75,6 +61,22 @@ const ChatPage = () => {
     };
     getConversations();
   }, [user._id]);
+
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get(
+          `https://swap-society-api.onrender.com/messages/${currentChat?._id}`
+        );
+        setMessages(res.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
