@@ -158,7 +158,9 @@ const ChatPage = () => {
                 />
                 <button
                   className="chatSubmitButton px-4 py-2 ml-2 text-white bg-teal-500 rounded-md hover:bg-teal-700"
-                  onClick={handleSubmit}
+                  onClick={handleSubmit}        
+                  disabled={newMessage===''}
+
                 >
                   Send
                 </button>
