@@ -6,7 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 const ProductCard = ({ product, onDelete }) => {
   const { userInfo } = useSelector((state) => state.auth); // Access user info from Redux
 
-  const isProductSeller = userInfo._id === product.seller._id; // Check if current user is the seller
+  const isProductSeller = userInfo?._id === product.seller?._id; // Check if current user is the seller
 
   // Implement logic to display product details (title, image, price, etc.)
   // You can link to a product details page here if needed.
@@ -24,12 +24,12 @@ const ProductCard = ({ product, onDelete }) => {
           <p className="text-gray-700 mb-2">Ksh. {product.price}</p>
           <p className="text-gray-700 mb-2 flex items-center gap-2">
             {" "}
-            <IoLocationOutline /> {product.location}
+            <IoLocationOutline /> {product?.location}
           </p>
         </div>
         <div className="flex flex-col justify-between gap-4">
           <div className="bg-orange-400 p-1 hover:bg-orange-700">
-            <Link to={`/products/${product._id}`}>Details</Link>
+            <Link to={`/products/${product?._id}`}>Details</Link>
           </div>
           {isProductSeller && ( // Conditionally render delete button
             <div>

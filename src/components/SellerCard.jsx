@@ -5,13 +5,14 @@ import { RiMessage2Line } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import PaymentOptionsModal from "./PaymentOptionsModal";
 
 const SellerCard = ({ product }) => {
   const sellerContact = product?.seller?.contact || "N/A"; // Assuming contact is phone number
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
   const user = userInfo?.user;
-  const isProductSeller = product.seller._id === user._id;
+  const isProductSeller = product?.seller?._id === user?._id;
 
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const { seller } = product;
@@ -32,7 +33,7 @@ const SellerCard = ({ product }) => {
     if (userInfo) {
       try {
         const response = await axios.post(
-          "http://localhost:5000/conversations",
+          "https://swap-society-api.onrender.com/conversations",
           {
             senderId: user._id,
             receiverId: seller._id,
@@ -87,7 +88,8 @@ const SellerCard = ({ product }) => {
 
       {showPaymentModal && (
         <div className="mt-3">
-          <PaymentModal showPaymentModal={showPaymentModal} />{" "}
+          <PaymentOptionsModal showPaymentModal={showPaymentModal}/>
+          {/* <PaymentModal showPaymentModal={showPaymentModal} />{" "} */}
         </div>
       )}
       {!isProductSeller && (
